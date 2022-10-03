@@ -67,22 +67,50 @@ export const getCategoryById = async (req, res) => {
 
 
 // Crear Categoria
-export const createUser = async (req, res) => {
-    const { id_usuario, nom_usuario, usr_creacion } = req.body
-    if (id_usuario == null) {
+export const createCategory = async (req, res) => {
+    const { nom_categoria, cod_color,cod_hobber_color, cat_imagen, usr_creacion } = req.body
+    // NOM_CATEGORIA varchar
+    // COD_ESTADO [char]
+    // COD_COLOR [varchar]
+    // COD_HOBBER_COLOR [varchar]
+    // CAT_IMAGEN [nvarchar]
+    // FEC_CREACION [date]
+    // USR_CREACION [varchar]
+    // FEC_BAJA [date]
+    // USR_BAJA [varchar]
+
+
+    //Validaciones
+    if (nom_categoria == null) {
         return res.status(400).
             json(
                 {
                     response_code: 99,
-                    message: 'Requerido Identificador de Usuario',
+                    message: 'Requerido Nombre de Categoria',
                     data: null
                 })
     }
-    if (nom_usuario == null) {
+    if (cod_color == null) {
         return res.status(400).
             json({
                 response_code: 99,
-                message: 'Requerido Nombrer de Usuario',
+                message: 'Requerido Color',
+                data: null
+            })
+    }
+    if (cod_hobber_color == null) {
+        return res.status(400).
+            json({
+                response_code: 99,
+                message: 'Requerido Color Hover',
+                data: null
+            })
+    }
+    if (cat_imagen == null) {
+        return res.status(400).
+            json({
+                response_code: 99,
+                message: 'Requerido Imagen',
                 data: null
             })
     }

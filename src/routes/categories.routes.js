@@ -7,7 +7,7 @@ router.get('/categories',getCategories);
 
 router.get('/category/:id',getCategoryById);
 
-// router.post('/user',createUser); 
+router.post('/category',createUser); 
 
 // router.get('/user/:id',getUserById);
 
