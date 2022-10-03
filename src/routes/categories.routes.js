@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getCategories, getCategoryById  } from "../controllers/categories.controller";
+import { createCategory, deleteCategoryById, getCategories, getCategoryById  } from "../controllers/categories.controller.js";
 
 const router=Router()
 
@@ -7,11 +7,9 @@ router.get('/categories',getCategories);
 
 router.get('/category/:id',getCategoryById);
 
-router.post('/category',createUser); 
+router.post('/category',createCategory); 
 
-// router.get('/user/:id',getUserById);
-
-// router.delete('/user/:id',deleteUserById);
+ router.delete('/category/:id',deleteCategoryById);
 
 export default router 
 

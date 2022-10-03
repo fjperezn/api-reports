@@ -64,21 +64,9 @@ export const getCategoryById = async (req, res) => {
     }
 }
 
-
-
 // Crear Categoria
 export const createCategory = async (req, res) => {
-    const { nom_categoria, cod_color,cod_hobber_color, cat_imagen, usr_creacion } = req.body
-    // NOM_CATEGORIA varchar
-    // COD_ESTADO [char]
-    // COD_COLOR [varchar]
-    // COD_HOBBER_COLOR [varchar]
-    // CAT_IMAGEN [nvarchar]
-    // FEC_CREACION [date]
-    // USR_CREACION [varchar]
-    // FEC_BAJA [date]
-    // USR_BAJA [varchar]
-
+    const { nom_categoria, cod_color, cod_hover_color, cat_imagen, usr_creacion } = req.body
 
     //Validaciones
     if (nom_categoria == null) {
@@ -98,7 +86,7 @@ export const createCategory = async (req, res) => {
                 data: null
             })
     }
-    if (cod_hobber_color == null) {
+    if (cod_hover_color == null) {
         return res.status(400).
             json({
                 response_code: 99,
@@ -122,40 +110,24 @@ export const createCategory = async (req, res) => {
                 data: null
             })
     }
-    // console.log(id_usuario, nom_usuario, usr_creacion)
+
     try {
         const pool = await getConnection();
-        let result = await pool.request()
-            .input('id', id_usuario)
-            .query(queryuser.getUserById);
-        // console.log(result.recordset[0]);
-        // console.log(result)
-        if (result.recordset[0] == null) {
-            // console.log("Puede Continuar");
-            let salida=pool.request()
-                .input("ide_usuario", sql.VarChar, id_usuario)
-                .input("nom_usuario", sql.VarChar, nom_usuario)
-                .input("cod_estado", sql.Char, 'A')
-                .input("usr_creacion", sql.VarChar, usr_creacion)
-                .query(queryuser.createUser)
-            // console.log(salida)    
-            res.status(201)
-            res.json({
-                response_code: 0,
-                message: 'Usuario Creado Correctamente',
-                data: result.recordset
-            })
-        }
-        else {
-            // console.log("DATA");
-            res.status(200);
-            res.json({
-                response_code: 99,
-                message: 'No se Puede insertar registro duplicado',
-                data: result.recordset
-            })
-        }
+        let salida = pool.request()
+            .input("nom_categoria", sql.VarChar, nom_categoria)
+            .input("cod_estado", sql.Char, 'A')
+            .input("cod_color", sql.VarChar, cod_color)
+            .input("cod_hobber_color", sql.VarChar, cod_hover_color)
+            .input("cat_imagen", sql.VarChar, cat_imagen)
+            .input("usr_creacion", sql.VarChar, usr_creacion)
+            .query(querycategory.createCategory)
         res.status(201)
+        res.json({
+            response_code: 0,
+            message: 'Usuario Creado Correctamente',
+            data: salida.recordset
+        })
+
     } catch (error) {
         console.log(error)
         res.status(500);
@@ -168,16 +140,14 @@ export const createCategory = async (req, res) => {
     }
 }
 
-
-
-export const deleteUserById = async (req, res) => {
+export const deleteCategoryById = async (req, res) => {
     const { id } = req.params;
     // console.log(id);
     try {
         const pool = await getConnection();
         let result = await pool.request()
             .input('id', id)
-            .query(queryuser.getUserById);
+            .query(querycategory.getCategoryById);
         // console.log(result.recordset[0]);
         console.log(result)
         if (result.recordset[0] == null) {
@@ -190,9 +160,9 @@ export const deleteUserById = async (req, res) => {
             })
         }
         else {
-            let salida=pool.request()
+            let salida = pool.request()
                 .input('id', id)
-                .query(queryuser.deleteUserById)
+                .query(querycategory.deleteCategoryById)
             // console.log(salida)    
             res.status(200)
             res.json({

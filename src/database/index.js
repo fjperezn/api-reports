@@ -1,2 +1,2 @@
 export * from './connection'
-export {queryuser, querycategory} from './querys'
+export {queryuser, querycategory} from './querys.js'

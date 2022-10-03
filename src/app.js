@@ -1,7 +1,7 @@
 import express from 'express'
-import config from './config'
-import usersRoutes from './routes/users.routes'
-import categoriesRoutes from './routes/categories.routes'
+import config from './config.js'
+import usersRoutes from './routes/users.routes.js'
+import categoriesRoutes from './routes/categories.routes.js'
 
 const app=express()
 
