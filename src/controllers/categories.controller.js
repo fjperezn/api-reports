@@ -1,4 +1,4 @@
-import { getConnection, sql, querycategory } from "../database";
+import { getConnection, sql, querycategory } from "../database/index.js";
 
 // Obtener Categorias
 export const getCategories = async (req, res) => {

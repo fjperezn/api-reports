@@ -1,4 +1,4 @@
-import { getConnection, sql, queryuser } from "../database";
+import { getConnection, sql, queryuser } from "../database/index.js";
 
 
 export const getUsers = async (req, res) => {
