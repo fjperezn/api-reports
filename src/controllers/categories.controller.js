@@ -2,6 +2,7 @@ import { getConnection, sql, querycategory } from "../database/index.js";
 
 // Obtener Categorias
 export const getCategories = async (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
     try {
         const pool = await getConnection();
         const result = await pool.request().query(querycategory.getAllCategories);
@@ -26,6 +27,7 @@ export const getCategories = async (req, res) => {
 
 // Recuperar Categoria po ID
 export const getCategoryById = async (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
     const { id } = req.params;
     // console.log(id);
     try {
@@ -66,6 +68,7 @@ export const getCategoryById = async (req, res) => {
 
 // Crear Categoria
 export const createCategory = async (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
     const { nom_categoria, cod_color, cod_hover_color, cat_imagen, usr_creacion } = req.body
 
     //Validaciones
@@ -141,6 +144,7 @@ export const createCategory = async (req, res) => {
 }
 
 export const deleteCategoryById = async (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
     const { id } = req.params;
     // console.log(id);
     try {

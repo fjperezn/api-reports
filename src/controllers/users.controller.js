@@ -2,6 +2,7 @@ import { getConnection, sql, queryuser } from "../database/index.js";
 
 
 export const getUsers = async (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
     try {
         const pool = await getConnection();
         const result = await pool.request().query(queryuser.getAllUsers);
@@ -25,6 +26,7 @@ export const getUsers = async (req, res) => {
 }
 
 export const createUser = async (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
     const { id_usuario, nom_usuario, usr_creacion } = req.body
     if (id_usuario == null) {
         return res.status(400).
@@ -98,6 +100,7 @@ export const createUser = async (req, res) => {
 }
 
 export const getUserById = async (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
     const { id } = req.params;
     // console.log(id);
     try {
@@ -138,6 +141,7 @@ export const getUserById = async (req, res) => {
 
 
 export const deleteUserById = async (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
     const { id } = req.params;
     // console.log(id);
     try {
